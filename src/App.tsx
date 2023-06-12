@@ -24,7 +24,7 @@ function App() {
 
   return (
     <div>
-      <Carousel content={content} />
+      <Carousel content={content} options={{ timer: 10000 }} />
     </div>
   );
 }

@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./Carousel.module.css";
 
 interface Options {
   direction?: "up" | "down" | "left" | "right";
   buttonStyle?: "default" | "none";
-  timer?: number;
+  timer: number;
   triggerNext?: boolean;
 }
 
@@ -17,20 +17,32 @@ export default function Carousel({ content, options }: Props) {
   const [currentDisplay, setCurrentDisplay] = useState(0);
 
   const onPrevClick = () => {
-    if (currentDisplay == 0) {
-      setCurrentDisplay(content.length - 1);
-    } else {
-      setCurrentDisplay((currState) => currState - 1);
-    }
+    setCurrentDisplay((currState) => {
+      if (currState === 0) {
+        return content.length - 1;
+      } else {
+        return currState - 1;
+      }
+    });
   };
 
   const onNextClick = () => {
-    if (currentDisplay == content.length - 1) {
-      setCurrentDisplay(0);
-    } else {
-      setCurrentDisplay((currState) => currState + 1);
-    }
+    setCurrentDisplay((currState) => {
+      if (currState === content.length - 1) {
+        return 0;
+      } else {
+        return currState + 1;
+      }
+    });
   };
+
+  useEffect(() => {
+    let intervalID: string | number | NodeJS.Timer | undefined;
+    if (options?.timer) {
+      intervalID = setInterval(onNextClick, options.timer);
+    }
+    return () => clearInterval(intervalID);
+  }, []);
 
   return (
     <div>
