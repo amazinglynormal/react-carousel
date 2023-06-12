@@ -13,7 +13,13 @@ function App() {
   const content: React.ReactElement[] = [];
 
   images.forEach((image) => {
-    content.push(<Image src={image.src} alt={image.alt} />);
+    content.push(
+      <Image
+        key={image.alt}
+        src={require(`./images/${image.src}`)}
+        alt={image.alt}
+      />
+    );
   });
 
   return (
