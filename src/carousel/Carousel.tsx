@@ -43,23 +43,35 @@ export default function Carousel({ content, options }: Props) {
       intervalID = setInterval(onNextClick, options.timer);
     }
     return () => clearInterval(intervalID);
-  }, []);
+  });
 
   return (
-    <div>
+    <div className={styles.relative}>
       <div className={styles.container}>
-        <button type="button" onClick={onPrevClick}>
+        <button
+          className={`${styles.prevButton} ${
+            styles[`prevButton-${options?.direction || "right"}`]
+          }`}
+          type="button"
+          onClick={onPrevClick}
+        >
           Prev
         </button>
         <div>{content[currentDisplay]}</div>
-        <button type="button" onClick={onNextClick}>
+        <button
+          className={`${styles.nextButton} ${
+            styles[`nextButton-${options?.direction || "right"}`]
+          }`}
+          type="button"
+          onClick={onNextClick}
+        >
           Next
         </button>
       </div>
       <IndexIndicator
         total={content.length}
         current={currentDisplay}
-        style="line"
+        shape="line"
       />
     </div>
   );
