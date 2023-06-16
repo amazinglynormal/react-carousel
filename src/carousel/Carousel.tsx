@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "./Carousel.module.css";
+import IndexIndicator from "./IndexIndicator";
 
 interface Options {
   direction?: "up" | "down" | "left" | "right";
@@ -55,7 +56,11 @@ export default function Carousel({ content, options }: Props) {
           Next
         </button>
       </div>
-      <h1>{currentDisplay}</h1>
+      <IndexIndicator
+        total={content.length}
+        current={currentDisplay}
+        style="line"
+      />
     </div>
   );
 }
