@@ -1,6 +1,9 @@
 .container {
   display: flex;
   align-items: center;
+  position: absolute;
+  bottom: 10px;
+  left: calc(50% - 5rem);
 }
 
 .circle,
